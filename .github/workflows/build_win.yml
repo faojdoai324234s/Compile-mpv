@@ -85,11 +85,7 @@ jobs:
           mkdir -p upload/bin
           mkdir -p upload/include/mpv
           mkdir -p upload/lib
-          echo "First ls..."
-          ls mpv
-          echo "Second ls..."
-          ls mpv/include
-          cp -r mpv/include/mpv/. upload/include/mpv
+          cp -r mpv/libmpv/. upload/include/mpv
           
           cd mpv
           
@@ -111,7 +107,9 @@ jobs:
 
           cp build/libmpv-2.dll ${{github.workspace}}/upload/bin
           gendef upload/bin/libmpv-2.dll
+          dlltool -d libmpv-2.def -l libmpv-2.lib
           cp upload/bin/libmpv-2.def upload/lib
+          cp upload/bin/libmpv-2.lib upload/lib
 
       - name: List upload directories
         run: |
