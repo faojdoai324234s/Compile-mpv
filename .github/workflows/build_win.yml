@@ -105,10 +105,12 @@ jobs:
           
           ninja -C build libmpv-2.dll
 
-          cp build/libmpv-2.dll ${{github.workspace}}/upload/bin
-          gendef upload/bin/libmpv-2.dll
-          llvm-dlltool -m i386:x86-64 -d ${{github.workspace}}/upload/bin/libmpv-2.def -D libmpv-2.dll -l ${{github.workspace}}/upload/lib/libmpv-2.lib
-          cp upload/bin/libmpv-2.def upload/lib
+          cd build
+          gendef libmpv-2.dll
+          llvm-dlltool -m i386:x86-64 -d libmpv-2.def -D libmpv-2.dll -l libmpv-2.lib
+          cp libmpv-2.dll ${{github.workspace}}/upload/bin
+          cp libmpv-2.def ${{github.workspace}}/upload/lib
+          cp libmpv-2.lib ${{github.workspace}}/upload/lib
 
       - name: List upload directories
         run: |
