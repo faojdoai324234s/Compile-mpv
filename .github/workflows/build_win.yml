@@ -85,6 +85,10 @@ jobs:
           mkdir -p upload/bin
           mkdir -p upload/include/mpv
           mkdir -p upload/lib
+          echo "First ls..."
+          ls mpv
+          echo "Second ls..."
+          ls mpv/include
           cp -r mpv/include/mpv/. upload/include/mpv
           
           cd mpv
