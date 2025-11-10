@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install meson ninja
-          sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 mingw-w64-tools binutils-mingw-w64-x86-64 nasm llvm
+          sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 mingw-w64-tools binutils nasm llvm
           
       - name: Download source code
         run: git clone --branch v0.38.0 https://github.com/mpv-player/mpv.git
