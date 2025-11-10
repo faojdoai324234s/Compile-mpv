@@ -17,9 +17,6 @@ jobs:
         run: |
           pip install meson ninja
           sudo apt update && sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 mingw-w64-tools nasm llvm
-          ls /usr/bin
-          llvm-dlltool -h
-          dlltoo
           
       - name: Download source code
         run: git clone --branch v0.38.0 https://github.com/mpv-player/mpv.git
@@ -110,7 +107,7 @@ jobs:
 
           cp build/libmpv-2.dll ${{github.workspace}}/upload/bin
           gendef upload/bin/libmpv-2.dll
-          dlltool -d libmpv-2.def -l libmpv-2.lib
+          llvm-dlltool -m i386:x86-64 -d libmpv-2.def -D libmpv-2.dll -l libmpv-2.lib
           cp upload/bin/libmpv-2.def upload/lib
           cp upload/bin/libmpv-2.lib upload/lib
 
