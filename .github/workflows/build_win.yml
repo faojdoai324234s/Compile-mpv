@@ -82,9 +82,9 @@ jobs:
 
       - name: Build application
         run: |
-          mkdir -P upload/bin
-          mkdir -P upload/include/mpv
-          mkdir -P upload/lib
+          mkdir -p upload/bin
+          mkdir -p upload/include/mpv
+          mkdir -p upload/lib
           cp -r mpv/include/mpv/. upload/include/mpv
           
           cd mpv
@@ -106,6 +106,8 @@ jobs:
           ninja -C build libmpv-2.dll
 
           cp build/libmpv-2.dll ${{github.workspace}}/upload/bin
+          gendef upload/bin/libmpv-2.dll
+          cp upload/bin/libmpv-2.def upload/lib
 
       - name: List upload directories
         run: |
