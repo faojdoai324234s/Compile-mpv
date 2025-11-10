@@ -19,7 +19,7 @@ jobs:
           sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 nasm llvm
           
       - name: Download source code
-        run: git clone --branch v0.39.0 https://github.com/mpv-player/mpv.git
+        run: git clone --branch v0.38.0 https://github.com/mpv-player/mpv.git
           
       - name: Initialize subprojects
         run: |
@@ -102,10 +102,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 0
           
-      - name: Upload artifact again
+      - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
           name: Windows-artifact
-          path: ${{github.workspace}}/mpv/buildaa
+          path: ${{github.workspace}}/mpv/build/mpv.exe
           if-no-files-found: ignore
           retention-days: 0
