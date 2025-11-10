@@ -82,6 +82,11 @@ jobs:
 
       - name: Build application
         run: |
+          mkdir -P upload/bin
+          mkdir -P upload/include/mpv
+          mkdir -P upload/lib
+          cp -r mpv/include/mpv/. upload/include/mpv
+          
           cd mpv
           
           meson setup -Ddefault_library=static -Dprefer_static=true \
@@ -89,6 +94,8 @@ jobs:
           --cross-file cross-file.txt build
 
           ninja -C build mpv.exe
+
+          cp build/mpv.exe ${{github.workspace}}/upload/bin
 
       - name: Build library
         run: |
@@ -98,11 +105,14 @@ jobs:
           
           ninja -C build libmpv-2.dll
 
-      - name: List directories
+          cp build/libmpv-2.dll ${{github.workspace}}/upload/bin
+
+      - name: List upload directories
         run: |
-          ls -R ${{github.workspace}}/mpv/build > ls.txt
+          echo "Listing upload directory..."
+          ls -R upload > ls.txt
           
-      - name: Upload artifact
+      - name: Upload directory list
         uses: actions/upload-artifact@v4
         with:
           name: ls-artifact
@@ -110,10 +120,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 0
           
-      - name: Upload executable
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows-artifact
-          path: ${{github.workspace}}/mpv/build/mpv.exee
+          path: ${{github.workspace}}/upload
           if-no-files-found: ignore
           retention-days: 0
