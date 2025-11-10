@@ -80,7 +80,7 @@ jobs:
           libswscale = libswscale_dep
           EOF
 
-      - name: Build library
+      - name: Build application
         run: |
           cd mpv
           
@@ -90,6 +90,14 @@ jobs:
 
           ninja -C build mpv.exe
 
+      - name: Build library
+        run: |
+          cd mpv
+          
+          meson configure build -Dlibmpv=true -Ddefault_library=shared
+          
+          ninja -C build libmpv-2.dll
+
       - name: List directories
         run: |
           ls -R ${{github.workspace}}/mpv/build > ls.txt
@@ -98,7 +106,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ls-artifact
-          path: ${{github.workspace}}/ls.txtaa
+          path: ${{github.workspace}}/ls.txt
           if-no-files-found: ignore
           retention-days: 0
           
@@ -106,6 +114,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Windows-artifact
-          path: ${{github.workspace}}/mpv/build/mpv.exe
+          path: ${{github.workspace}}/mpv/build/mpv.exee
           if-no-files-found: ignore
           retention-days: 0
