@@ -102,10 +102,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 0
           
-      - name: Upload artifact again
+      - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
           name: Windows-artifact
-          path: ${{github.workspace}}/mpv/buildaa
+          path: ${{github.workspace}}/mpv/build/mpv.exe
           if-no-files-found: ignore
           retention-days: 0
