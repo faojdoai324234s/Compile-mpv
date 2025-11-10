@@ -107,9 +107,8 @@ jobs:
 
           cp build/libmpv-2.dll ${{github.workspace}}/upload/bin
           gendef upload/bin/libmpv-2.dll
-          llvm-dlltool -m i386:x86-64 -d libmpv-2.def -D libmpv-2.dll -l libmpv-2.lib
+          llvm-dlltool -m i386:x86-64 -d ${{github.workspace}}/upload/bin/libmpv-2.def -D libmpv-2.dll -l ${{github.workspace}}/upload/lib/libmpv-2.lib
           cp upload/bin/libmpv-2.def upload/lib
-          cp upload/bin/libmpv-2.lib upload/lib
 
       - name: List upload directories
         run: |
