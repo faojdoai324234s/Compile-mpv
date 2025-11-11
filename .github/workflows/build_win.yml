@@ -79,13 +79,6 @@ jobs:
           libswresample = libswresample_dep
           libswscale = libswscale_dep
           EOF
-
-      - name: Copy include headers
-        run: |
-          mkdir -p upload/bin
-          mkdir -p upload/include/mpv
-          mkdir -p upload/lib
-          cp -r mpv/libmpv/. upload/include/mpv
           
       - name: Build application
         run: |
@@ -93,35 +86,15 @@ jobs:
           
           meson setup -Ddefault_library=static -Dprefer_static=true \
           -Dc_link_args='-static' -Dcpp_link_args='-static' \
-          -Dffmpeg:default_library=static -Dlibass:default_library=static \
           --cross-file cross-file.txt build
 
           ninja -C build mpv.exe
-
-          cp build/mpv.exe ${{github.workspace}}/upload/bin
-
-      - name: Build library
-        run: |
-          cd mpv
-          
-          meson configure build -Dlibmpv=true -Ddefault_library=shared
-          
-          ninja -C build libmpv-2.dll
-
-      - name: Copy library files
-        run: |
-          cd mpv/build
-          gendef libmpv-2.dll
-          llvm-dlltool -m i386:x86-64 -d libmpv-2.def -D libmpv-2.dll -l libmpv-2.lib
-          cp libmpv-2.dll ${{github.workspace}}/upload/bin
-          cp libmpv-2.def ${{github.workspace}}/upload/lib
-          cp libmpv-2.lib ${{github.workspace}}/upload/lib
           
           
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows-artifact
-          path: ${{github.workspace}}/upload
+          path: ${{github.workspace}}/mpv/build/mpv.exe
           if-no-files-found: ignore
           retention-days: 0
