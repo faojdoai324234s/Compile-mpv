@@ -86,6 +86,7 @@ jobs:
           
           meson setup -Ddefault_library=static -Dprefer_static=true \
           -Dc_link_args='-static' -Dcpp_link_args='-static' \
+          -Dgpl=true \
           --cross-file cross-file.txt build
 
           ninja -C build mpv.exe
