@@ -87,8 +87,10 @@ jobs:
           meson setup -Ddefault_library=static -Dprefer_static=true \
           -Dc_link_args='-static' -Dcpp_link_args='-static' \
           -Dgpl=true -Dlcms2=enabled -Dlibplacebo:lcms=enabled -Dlibavdevice=enabled -Diconv=enabled \
-          -Dffmpeg:gpl=enabled -Dffmpeg:programs=enabled -Dffmpeg:vulkan=auto -Dffmpeg:libxml2=enabled -Dffmpeg:dash_demuxer=enabled -Dffmpeg:webm_dash_manifest_demuxer=enabled \
-          -Dffmpeg:dash_muxer=enabled -Dffmpeg:webm_dash_manifest_muxer=enabled \
+          -Dffmpeg:gpl=enabled -Dffmpeg:programs=enabled -Dffmpeg:vulkan=auto \
+          -Dffmpeg:libxml2=enabled -Dffmpeg:dash_demuxer=enabled -Dffmpeg:webm_dash_manifest_demuxer=enabled -Dffmpeg:dash_muxer=enabled -Dffmpeg:webm_dash_manifest_muxer=enabled \
+          -Dffmpeg:hls_demuxer=enabled -Dffmpeg:hls_protocol=enabled -Dffmpeg:hls_muxer=enabled \
+          -Dffmpeg:http_protocol=enabled -Dffmpeg:https_protocol=enabled -Dffmpeg:tls_protocol=enabled \
           -Dcplayer=true -Dcplugins=enabled \
           --cross-file cross-file.txt build
 
