@@ -90,7 +90,7 @@ jobs:
           -Dffmpeg:gpl=enabled -Dffmpeg:programs=enabled -Dffmpeg:vulkan=auto \
           -Dffmpeg:libxml2=enabled -Dffmpeg:dash_demuxer=enabled -Dffmpeg:webm_dash_manifest_demuxer=enabled -Dffmpeg:dash_muxer=enabled -Dffmpeg:webm_dash_manifest_muxer=enabled \
           -Dffmpeg:hls_demuxer=enabled -Dffmpeg:hls_protocol=enabled -Dffmpeg:hls_muxer=enabled \
-          -Dffmpeg:http_protocol=enabled -Dffmpeg:https_protocol=enabled -Dffmpeg:tls_protocol=enabled \
+          -Dffmpeg:http_protocol=enabled -Dffmpeg:https_protocol=enabled -Dffmpeg:tls_protocol=enabled -Dffmpeg:openssl=enabled \
           -Dcplayer=true -Dcplugins=enabled \
           --cross-file cross-file.txt build
 
