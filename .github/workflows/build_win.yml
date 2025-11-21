@@ -92,7 +92,8 @@ jobs:
           cd mpv
 
           meson setup build -Dlibmpv=true -Ddefault_library=shared \
-          -Dffmpeg:gpl=enabled -Dffmpeg:openssl=enabled
+          -Dffmpeg:gpl=enabled -Dffmpeg:openssl=enabled \
+          --cross-file cross-file.txt
           
           ninja -C build libmpv-2.dll
 
