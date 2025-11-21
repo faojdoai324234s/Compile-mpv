@@ -87,25 +87,14 @@ jobs:
           mkdir -p upload/lib
           cp -r mpv/libmpv/. upload/include/mpv
           
-      - name: Build application
-        run: |
-          cd mpv
-          
-          meson setup -Ddefault_library=static -Dprefer_static=true \
-          -Dc_link_args='-static' -Dcpp_link_args='-static' \
-          -Dffmpeg:default_library=static -Dlibass:default_library=static \
-          -Dffmpeg:gpl=enabled -Dffmpeg:openssl=enabled \
-          --cross-file cross-file.txt build
-
-          ninja -C build mpv.exe
-
-          cp build/mpv.exe ${{github.workspace}}/upload/bin
-
       - name: Build library
         run: |
           cd mpv
-          
-          meson configure build -Dlibmpv=true -Ddefault_library=shared
+
+          meson setup -Dlibmpv=true -Ddefault_library=static -Dprefer_static=true \
+          -Dc_link_args='-static' -Dcpp_link_args='-static' \
+          -Dffmpeg:default_library=static -Dlibass:default_library=static \
+          -Dffmpeg:gpl=enabled -Dffmpeg:openssl=enabled \
           
           ninja -C build libmpv-2.dll
 
