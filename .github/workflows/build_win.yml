@@ -91,10 +91,7 @@ jobs:
         run: |
           cd mpv
 
-          meson setup build -Dlibmpv=true -Ddefault_library=static -Dprefer_static=true \
-          -Dlibass:require-system-font-provider=false \
-          -Dc_link_args='-static' -Dcpp_link_args='-static' \
-          -Dffmpeg:default_library=static -Dlibass:default_library=static \
+          meson setup build -Dlibmpv=true -Ddefault_library=shared \
           -Dffmpeg:gpl=enabled -Dffmpeg:openssl=enabled
           
           ninja -C build libmpv-2.dll
